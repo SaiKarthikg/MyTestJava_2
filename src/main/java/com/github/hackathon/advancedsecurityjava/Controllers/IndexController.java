@@ -39,14 +39,17 @@ public class IndexController {
 
       if (bookname != null) {
         // Filter by book name
-        query = "SELECT * FROM Books WHERE name LIKE '%" + bookname + "%'";
+        query = "SELECT * FROM Books WHERE name LIKE ?";
+        parameters.add("%" + bookname + "%");
       } else if (bookauthor != null) {
         // Filter by book author
-        query = "SELECT * FROM Books WHERE author LIKE '%" + bookauthor + "%'";
+        query = "SELECT * FROM Books WHERE author LIKE ?";
+        parameters.add("%" + bookauthor + "%");
       } else if (bookread != null) {
         // Filter by if the book has been read or not
         Integer read = bookread ? 1 : 0;
-        query = "SELECT * FROM Books WHERE read = '" + read.toString() + "'";
+        query = "SELECT * FROM Books WHERE read = ?";
+        parameters.add(read.toString());
       } else {
         // All books
         query = "SELECT * FROM Books";
